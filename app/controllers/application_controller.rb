@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include JsonWebToken
+  before_action :authorize_request
+
   def not_found
     render json: { error: 'not_found' }
   end
