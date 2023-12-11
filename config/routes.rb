@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
       namespace :authorizations, path: '' do
-         
-          post '/register', to: 'register#create'
-          
+        post '/register', to: 'register#create'
+        post '/authentication', to: 'authentication#login'
       end
     end
   end
