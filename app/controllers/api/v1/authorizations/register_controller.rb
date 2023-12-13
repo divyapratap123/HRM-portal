@@ -2,14 +2,15 @@ module Api::V1
   module Authorizations
 		class RegisterController < ApplicationController
 			  include JsonWebToken
-			  
+			  include Response
+
 			  protect_from_forgery with: :exception, except: :create
 			  skip_before_action :authorize_request, only: :create
 
 			 def create
         begin    	
           ActiveRecord::Base.transaction do
-            # params[:user][:role] = params[:user][:role]
+            params[:user][:role] = params[:user][:role]
             @user = User.new(user_params)
             if @user.save
             	render json: {messages: "user created succesfully"}
@@ -19,7 +20,6 @@ module Api::V1
             end
           end
         rescue Exception => e
-          Bugsnag.notify(e)
           email_exist = e&.message.include?("email has already") rescue nil
           if email_exist
             un_expected_error("#{I18n.t 'email_exist'}",400)

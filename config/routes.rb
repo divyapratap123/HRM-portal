@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           resources :socials_login, only: [:create] 
              
           
+
       end
     end
   end
