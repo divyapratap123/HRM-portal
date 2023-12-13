@@ -2,6 +2,8 @@ module Api::V1
   module Authorizations
     class AuthenticationController < ApplicationController
       before_action :authorize_request, except: :login
+      skip_before_action :authorize_request, only: [:create]
+
       def login
         @user = User.find_by_email(params[:email])
         if @user&.authenticate(params[:password])
@@ -12,6 +14,9 @@ module Api::V1
         else
           render json: { error: 'unauthorized' }, status: :unauthorized
         end
+      end
+      def create
+
       end
 
       private

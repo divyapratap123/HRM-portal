@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       namespace :authorizations, path: '' do
          
           post '/register', to: 'register#create'
+          #get '/auth/:provider/callback', to: 'socialslogin#create'
+          resources :socials_login, only: [:create] 
+             
           
       end
     end
