@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       namespace :authorizations, path: '' do
         post '/register', to: 'register#create'
         post '/authentication', to: 'authentication#login'
+        post '/change_password', to: 'passwords#change_password'
       end
     end
   end

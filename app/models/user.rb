@@ -11,4 +11,12 @@ class User < ApplicationRecord
   validates :password,
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
+
+
+
+   def reset_password!(password)
+    self.reset_password_token = nil
+    self.password = password
+    save
+  end           
 end
